@@ -110,8 +110,7 @@ class BaseSDESolver(metaclass=better_abc.ABCMeta):
 
         ys = [y0]
         prev_error_ratio = None
-
-        for out_t in ts[1:]:
+        for i, out_t in enumerate(ts[1:], 1):
             while curr_t < out_t:
                 next_t = min(curr_t + step_size, ts[-1])
                 if self.adaptive:
@@ -141,6 +140,7 @@ class BaseSDESolver(metaclass=better_abc.ABCMeta):
                         prev_t, prev_y = curr_t, curr_y
                         curr_t, curr_y, curr_extra = next_t, next_y, next_extra
                 else:
+                    next_t = ts[i]
                     prev_t, prev_y = curr_t, curr_y
                     curr_y, curr_extra = self.step(curr_t, next_t, curr_y, curr_extra)
                     curr_t = next_t
