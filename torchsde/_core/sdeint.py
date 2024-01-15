@@ -91,8 +91,8 @@ def sdeint(sde,
     del unused_kwargs
 
     sde, y0, ts, bm, method, options = check_contract(sde, y0, ts, bm, method, adaptive, options, names, logqp)
-    misc.assert_no_grad(['ts', 'dt', 'rtol', 'atol', 'dt_min'],
-                        [ts, dt, rtol, atol, dt_min])
+    misc.assert_no_grad(['dt', 'rtol', 'atol', 'dt_min'],
+                        [dt, rtol, atol, dt_min])
 
     solver_fn = methods.select(method=method, sde_type=sde.sde_type)
     solver = solver_fn(
